@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CookBook</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
+    <string name="title_activity_sensors">SensorsActivity</string>
+    <string name="next_sensor">Check how proximity sensor works</string>
+    <string name="title_next_activity_sensors">Proximity sensor</string>
+
+    <string name="details_description">Description</string>
+
+    <string name="details_instruction">Instruction</string>
+
+
+    <plurals name="details_ingredients">
+        <item quantity="one">Ingredient</item>
+        <item quantity="other">Ingredients</item>
+    </plurals>
+
+    <plurals name="sensors_summary_info">
+        <item quantity="one">You have only one sensor...</item>
+        <item quantity="other">You have %d sensors! WOW</item>
+    </plurals>
+    <string name="title_activity_create_recipe">CreateRecipeActivity</string>
+
+
+</resources>

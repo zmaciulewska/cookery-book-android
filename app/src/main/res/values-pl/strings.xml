@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Przepiśnik</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="title_activity_recipe_details">Przepis - szczegóły</string>
+    <string name="title_activity_sensors">Sensory</string>
+    <string name="next_sensor">Sprawdź działanie czujnika zbliżeniowego</string>
+    <string name="title_next_activity_sensors">Sensor zbliżeniowy</string>
+
+    <string name="details_description">O przepisie</string>
+    <string name="details_instruction">Przygotowanie</string>
+
+    <plurals name="details_ingredients">
+        <item quantity="one">Składnik</item>
+        <item quantity= "other">Składniki</item>
+    </plurals>
+
+
+</resources>
