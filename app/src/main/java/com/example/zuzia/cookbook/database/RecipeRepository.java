@@ -26,15 +26,14 @@ public class RecipeRepository {
     }
 
     public void insert(Recipe recipe) {
-        recipeDao.insert(recipe);
-    }
+        new insertAsyncTask(recipeDao).execute(recipe);    }
 
     public void update(Recipe recipe) {
-        recipeDao.update(recipe);
+        new updateAsyncRecipe(recipeDao).execute(recipe);
     }
 
     public void delete(Recipe recipe) {
-        recipeDao.delete(recipe);
+        new deleteAsyncRecipe(recipeDao).execute(recipe);
     }
 
     public LiveData<List<Recipe>> findByTitle(String title) {
@@ -56,4 +55,33 @@ public class RecipeRepository {
         }
     }
 
+    private static class updateAsyncRecipe extends AsyncTask<Recipe, Void, Void> {
+
+        private RecipeDao asyncRecipeDao;
+
+        updateAsyncRecipe(RecipeDao dao) {
+            asyncRecipeDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Recipe... params) {
+            asyncRecipeDao.update(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAsyncRecipe extends AsyncTask<Recipe, Void, Void> {
+
+        private RecipeDao asyncRecipeDao;
+
+        deleteAsyncRecipe(RecipeDao dao) {
+            asyncRecipeDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Recipe... params) {
+            asyncRecipeDao.delete(params[0]);
+            return null;
+        }
+    }
 }

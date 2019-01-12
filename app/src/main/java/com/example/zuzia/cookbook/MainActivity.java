@@ -2,19 +2,23 @@ package com.example.zuzia.cookbook;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.arch.lifecycle.ViewModelProviders;
+import android.widget.EditText;
 
 import com.example.zuzia.cookbook.database.RecipeViewModel;
 //import com.example.zuzia.cookbook.recipesManager.Recipe;
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //private RecyclerView.Adapter adapter;
     private RecipeListAdapter adapter;
     private List<Recipe> recipes;
-    private RecipeViewModel recipeViewModel;
+    public static RecipeViewModel recipeViewModel;
     Context context;
 
 
@@ -117,8 +121,26 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_find) {
+            Log.d("CookBook","Wybrano settings");
+           // startActivity(new Intent(MainActivity.this, FindByTitleActivity.class));
+
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View formElementsView = inflater.inflate(R.layout.find_recipe, null, false);
+            final EditText recipeTitle = formElementsView.findViewById(R.id.findTitle);
+            new AlertDialog.Builder(context)
+                    .setView(formElementsView)
+                    .setTitle("Find recipe")
+                    .setPositiveButton("Find",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    String title = recipeTitle.getText().toString();
+                                    Intent intent = new Intent(context, FindByTitleActivity.class);
+                                    intent.putExtra("Q", title);
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            }).show();
         }
 
         return super.onOptionsItemSelected(item);

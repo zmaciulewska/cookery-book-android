@@ -67,6 +67,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         recipeListViewHolder.recipeDescription.setText(recipeList.get(i).getDescription());
        // recipeListViewHolder.recipePhoto.setImageResource(recipeList.get(i).getImageId());
         recipeListViewHolder.recipePhoto.setImageResource(R.drawable.culinary);
+
+
+        recipeListViewHolder.cardView.setOnLongClickListener(new LongClickListenerRecipeRecord(recipeList.get(i)));
+
     }
 
     @Override

@@ -24,4 +24,16 @@ public class RecipeViewModel extends AndroidViewModel {
         return allRecipes; }
 
     public void insert(Recipe recipe) { recipeRepository.insert(recipe); }
+
+    public void update(Recipe recipe){
+        recipeRepository.update(recipe);
+    }
+
+    public void delete(Recipe recipe){
+        recipeRepository.delete(recipe);
+    }
+
+    public LiveData<List<Recipe>> findByTitle(String title) {
+       return recipeRepository.findByTitle(title);
+    }
 }
