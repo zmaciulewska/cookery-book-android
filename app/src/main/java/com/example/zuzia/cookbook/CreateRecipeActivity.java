@@ -47,7 +47,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         recipeViewModel.insert(recipe);
        // recipesManager.getRecipeList().add(recipe);
-        Snackbar.make(view, "Creating task, please wait", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, "Creating recipe, please wait", Snackbar.LENGTH_LONG)
                 .show();
         new Handler().postDelayed(new Runnable() {
             @Override

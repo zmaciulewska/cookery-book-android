@@ -47,7 +47,7 @@ class LongClickListenerRecipeRecord implements View.OnLongClickListener {
 
     private void deleteRecord(Recipe recipe) {
         MainActivity.recipeViewModel.delete(recipe);
-        Toast.makeText(context, "Task record was deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Recipe deleted.", Toast.LENGTH_SHORT).show();
         //((MainActivity) context).readRecords();
     }
 
@@ -60,7 +60,7 @@ class LongClickListenerRecipeRecord implements View.OnLongClickListener {
         title.setText(recipe.getTitle());
         description.setText(recipe.getDescription());
         instruction.setText(recipe.getInstruction());
-        new AlertDialog.Builder(context).setView(formElementsView).setTitle("Edit Record")
+        new AlertDialog.Builder(context).setView(formElementsView).setTitle("Edit recipe")
                 .setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -72,7 +72,7 @@ class LongClickListenerRecipeRecord implements View.OnLongClickListener {
                         MainActivity.recipeViewModel.update(actualRecipe);
 
                         //tableControllerTask.update(task1);
-                        Toast.makeText(context, "Task record was updated.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Recipe updated.", Toast.LENGTH_SHORT).show();
 
                         //((MainActivity) context).readRecords();
                         dialog.cancel();

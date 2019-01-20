@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 public class Recipe {
 
     @PrimaryKey(autoGenerate = true)
-
     @ColumnInfo(name = "recipe_id")
     private int id;
 
