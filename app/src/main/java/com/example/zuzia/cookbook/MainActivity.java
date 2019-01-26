@@ -143,6 +143,32 @@ public class MainActivity extends AppCompatActivity {
                             }).show();
         }
 
+        if (id == R.id.action_inspire) {
+            Log.d("CookBook","Wybrano inspire");
+            Intent intent = new Intent(context, BrowseExternalRecipesActivity.class);
+            //intent.putExtra("Q", title);
+            startActivity(intent);
+
+
+            // startActivity(new Intent(MainActivity.this, FindByTitleActivity.class));
+
+            /*LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View formElementsView = inflater.inflate(R.layout.find_recipe, null, false);
+            final EditText recipeTitle = formElementsView.findViewById(R.id.findTitle);
+            new AlertDialog.Builder(context)
+                    .setView(formElementsView)
+                    .setTitle("Find recipe")
+                    .setPositiveButton("Find",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    String title = recipeTitle.getText().toString();
+                                    Intent intent = new Intent(context, FindByTitleActivity.class);
+                                    intent.putExtra("Q", title);
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            }).show();*/
+        }
         return super.onOptionsItemSelected(item);
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CookBook</string>
     <string name="action_find">Find</string>
+    <string name="action_inspire">Get inspired</string>
     <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
     <string name="title_activity_sensors">SensorsActivity</string>
     <string name="next_sensor">Check how proximity sensor works</string>

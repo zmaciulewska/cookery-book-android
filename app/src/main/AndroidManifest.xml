@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zuzia.cookbook">
 
+    <!-- for rest api client -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
@@ -41,7 +44,8 @@
             android:name=".CreateRecipeActivity"
             android:label="@string/title_activity_create_recipe"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FindByTitleActivity"></activity>
+        <activity android:name=".FindByTitleActivity" />
+        <activity android:name=".BrowseExternalRecipesActivity"></activity>
     </application>
 
 </manifest>

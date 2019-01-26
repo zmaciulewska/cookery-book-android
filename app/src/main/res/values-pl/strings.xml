@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Przepiśnik</string>
     <string name="action_find">Szukaj</string>
+    <string name="action_inspire">Zainspiruj się</string>
     <string name="title_activity_recipe_details">Przepis - szczegóły</string>
     <string name="title_activity_sensors">Sensory</string>
     <string name="next_sensor">Sprawdź działanie czujnika zbliżeniowego</string>
