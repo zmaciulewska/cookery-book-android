@@ -27,6 +27,9 @@ public class Recipe {
     @ColumnInfo
     private List<String> ingredients;
 
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
+
 
     @Override
     public String toString() {
@@ -77,5 +80,13 @@ public class Recipe {
 
     public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

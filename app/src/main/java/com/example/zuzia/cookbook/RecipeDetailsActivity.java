@@ -2,6 +2,8 @@ package com.example.zuzia.cookbook;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -43,20 +45,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
 
     }
-    public void addListenerOnButton() {
-        imageButton = (Button) findViewById(R.id.imageButtonSelector);
-        imageButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                Toast.makeText(RecipeDetailsActivity.this,
-                        "ImageButton (selector) is clicked!",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-    }
     private void display() {
         // ingredients list
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_view_element, recipe.getIngredients());
@@ -85,12 +74,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         descriptionTextView.setText(description);
         // photo
         //int photoId = recipe.getImageId();
-        ImageView imageView = findViewById(R.id.recipe_photo);
-
-        //imageView.setImageResource(photoId);
-
-
-        addListenerOnButton();
+        byte[] array = recipe.getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(array, 0, array.length);
+        ImageView imageView = findViewById(R.id.details_photo);
+        imageView.setImageBitmap(bitmap);
 
     }
 

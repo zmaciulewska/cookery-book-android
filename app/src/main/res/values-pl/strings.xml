@@ -7,10 +7,16 @@
     <string name="next_sensor">Sprawdź działanie czujnika zbliżeniowego</string>
     <string name="title_next_activity_sensors">Sensor zbliżeniowy</string>
 
+    <string name="title_activity_create_recipe">Nowy przepis</string>
+
     <string name="details_description">O przepisie</string>
     <string name="details_instruction">Przygotowanie</string>
     <string name="ingredient">Składnik</string>
-
+    <string name="select_picture">Wybierz obraz</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="title">Tytuł</string>
+    <string name="description">Opis</string>
+    <string name="instruction">Instrukcja</string>
     <plurals name="details_ingredients">
         <item quantity="one">Składnik</item>
         <item quantity= "other">Składniki</item>

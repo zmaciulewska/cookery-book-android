@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -19,6 +22,8 @@ import android.widget.ListView;
 import com.example.zuzia.cookbook.database.Recipe;
 import com.example.zuzia.cookbook.database.RecipeViewModel;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,11 +31,12 @@ import java.util.List;
 
 public class CreateRecipeActivity extends AppCompatActivity {
 
-    //private RecipesManager recipesManager = RecipesManager.getInstance();
-    List<String> ingredients;
-    ListView ingredientsList;
+    private List<String> ingredients;
+    private ArrayAdapter adapter;
+    private ListView ingredientsList;
+    private byte[] byteImage;
+    private Bitmap bitmap = null;
 
-    private MainActivity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Logs", "CreatingTaskActivity: onCreate method.");
@@ -39,16 +45,26 @@ public class CreateRecipeActivity extends AppCompatActivity {
         // ingredients list
         ingredientsList = findViewById(R.id.ingredients_mutable_list);
         ingredients = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_view_element, ingredients);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_view_element, ingredients);
         ingredientsList.setAdapter(adapter);
+        ingredientsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+
+                Log.v("CookBook", " long clicked pos: " + pos);
+                ingredients.remove(pos);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
+
     public void ingredientButtonClicked(View view) {
         String ingredient = ((EditText) findViewById(R.id.editText_ingredient)).getText().toString();
         ingredients.add(ingredient);
-        Log.d("CookBook", "Dodano do listy");
-        ingredientsList = findViewById(R.id.ingredients_mutable_list);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_view_element, ingredients);
-        ingredientsList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        ((EditText) findViewById(R.id.editText_ingredient)).setText("");
 
     }
 
@@ -58,18 +74,30 @@ public class CreateRecipeActivity extends AppCompatActivity {
         String title = ((EditText) findViewById(R.id.editText_title)).getText().toString();
         String description = ((EditText) findViewById(R.id.editText_description)).getText().toString();
         String instruction = ((EditText) findViewById(R.id.editText_instruction)).getText().toString();
-        Recipe recipe  = new Recipe();
+        Recipe recipe = new Recipe();
         recipe.setTitle(title);
         recipe.setDescription(description);
         recipe.setInstruction(instruction);
 
         recipe.setIngredients(ingredients);
-        //recipe.setImageId(R.drawable.culinary);
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byteImage = stream.toByteArray();
+            recipe.setImage(byteImage);
+        } else {
+            Drawable drawable = getResources().getDrawable(R.drawable.culinary);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Bitmap bitmapDrawable = ((BitmapDrawable) drawable).getBitmap();
+            bitmapDrawable.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] bitMapData = stream.toByteArray();
+            recipe.setImage(bitMapData);
+        }
 
 
         RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         recipeViewModel.insert(recipe);
-       // recipesManager.getRecipeList().add(recipe);
+        // recipesManager.getRecipeList().add(recipe);
         Snackbar.make(view, "Creating recipe, please wait", Snackbar.LENGTH_LONG)
                 .show();
         new Handler().postDelayed(new Runnable() {
@@ -96,9 +124,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
 
         //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
             } catch (FileNotFoundException e) {

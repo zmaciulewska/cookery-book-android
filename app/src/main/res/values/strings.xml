@@ -2,7 +2,7 @@
     <string name="app_name">CookBook</string>
     <string name="action_find">Find</string>
     <string name="action_inspire">Get inspired</string>
-    <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
+    <string name="title_activity_recipe_details">Recipe details</string>
     <string name="title_activity_sensors">SensorsActivity</string>
     <string name="next_sensor">Check how proximity sensor works</string>
     <string name="title_next_activity_sensors">Proximity sensor</string>
@@ -21,8 +21,13 @@
         <item quantity="one">You have only one sensor...</item>
         <item quantity="other">You have %d sensors! WOW</item>
     </plurals>
-    <string name="title_activity_create_recipe">CreateRecipeActivity</string>
+    <string name="title_activity_create_recipe">New recipe</string>
     <string name="ingredient">Ingredient</string>
+    <string name="select_picture">Select picture</string>
+    <string name="confirm">Confirm</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="instruction">Instruction</string>
 
 
 </resources>

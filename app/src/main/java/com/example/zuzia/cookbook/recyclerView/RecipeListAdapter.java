@@ -2,9 +2,12 @@ package com.example.zuzia.cookbook.recyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,8 +71,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(@NonNull RecipeListViewHolder recipeListViewHolder, int i) {
         recipeListViewHolder.recipeTitle.setText(recipeList.get(i).getTitle());
         recipeListViewHolder.recipeDescription.setText(recipeList.get(i).getDescription());
-       // recipeListViewHolder.recipePhoto.setImageResource(recipeList.get(i).getImageId());
-        recipeListViewHolder.recipePhoto.setImageResource(R.drawable.culinary);
+        byte[] array = recipeList.get(i).getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(array, 0, array.length);
+        recipeListViewHolder.recipePhoto.setImageBitmap(bitmap);
         recipeListViewHolder.cardView.setOnClickListener(new ItemClickSupport(recipeList.get(i)));
         recipeListViewHolder.cardView.setOnLongClickListener(new LongClickListenerRecipeRecord(recipeList.get(i)));
     }

@@ -25,7 +25,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:inputType="textCapCharacters"
                 />
 
@@ -36,7 +36,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Description"
+                android:hint="@string/description"
+                android:inputType="textCapSentences"
 
                />
             <RelativeLayout android:layout_height="wrap_content"
@@ -54,7 +55,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:layout_toStartOf="@+id/button_ingredient"
-                    android:hint="@string/ingredient" />
+                    android:hint="@string/ingredient"
+                    android:inputType="textCapSentences"
+                    />
 
                 <Button
                     android:id="@+id/button_ingredient"
@@ -72,6 +75,9 @@
 
             <com.example.zuzia.cookbook.recyclerView.NonScrollListView
                 android:id="@+id/ingredients_mutable_list"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </com.example.zuzia.cookbook.recyclerView.NonScrollListView>
@@ -83,34 +89,35 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Instruction"
-                 />
+                android:hint="@string/instruction"
+                android:inputType="textCapSentences"
+                />
 
             <Button
                 android:id="@+id/button_gallery"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:onClick="onGalleryButtonAction"
-                android:text="Confirm"
+                android:text="@string/select_picture"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_confirm"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:onClick="confirmButtonClicked"
-                android:text="Confirm"
+                android:text="@string/confirm"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </android.support.design.widget.CoordinatorLayout>
