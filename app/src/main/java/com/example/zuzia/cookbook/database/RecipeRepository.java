@@ -21,7 +21,7 @@ public class RecipeRepository {
         return allRecipes;
     }
 
-    public Recipe getSingleRecord(int id) {
+    public LiveData<Recipe> getSingleRecord(int id) {
         return recipeDao.getSingleRecord(id);
     }
 
@@ -39,6 +39,7 @@ public class RecipeRepository {
     public LiveData<List<Recipe>> findByTitle(String title) {
         return recipeDao.findByTitle(title);
     }
+
 
     private static class insertAsyncTask extends AsyncTask<Recipe, Void, Void> {
 
@@ -84,4 +85,20 @@ public class RecipeRepository {
             return null;
         }
     }
+
+    private static class readSingleRecordAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private RecipeDao asyncRecipeDao;
+
+        readSingleRecordAsyncTask(RecipeDao dao) {
+            asyncRecipeDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            asyncRecipeDao.getSingleRecord(integers[0]);
+            return null;
+        }
+    }
+
 }

@@ -21,8 +21,12 @@ public class RecipeViewModel extends AndroidViewModel {
 
     public LiveData<List<Recipe>> getAllRecipes() {
         Log.d("CookBook", "Get all recipes invoked. Recipes: " + allRecipes.toString() );
-        return allRecipes; }
+        return allRecipes;
+    }
 
+    public LiveData<Recipe> getRecipe(int id) {
+        return recipeRepository.getSingleRecord(id);
+    }
     public void insert(Recipe recipe) { recipeRepository.insert(recipe); }
 
     public void update(Recipe recipe){

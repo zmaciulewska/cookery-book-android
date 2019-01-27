@@ -9,6 +9,7 @@
 
     <string name="details_description">O przepisie</string>
     <string name="details_instruction">Przygotowanie</string>
+    <string name="ingredient">Składnik</string>
 
     <plurals name="details_ingredients">
         <item quantity="one">Składnik</item>

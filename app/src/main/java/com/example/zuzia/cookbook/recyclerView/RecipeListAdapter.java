@@ -1,16 +1,21 @@
 package com.example.zuzia.cookbook.recyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zuzia.cookbook.CreateRecipeActivity;
+import com.example.zuzia.cookbook.MainActivity;
 import com.example.zuzia.cookbook.R;
+import com.example.zuzia.cookbook.RecipeDetailsActivity;
 import com.example.zuzia.cookbook.database.Recipe;
 //import com.example.zuzia.cookbook.recipesManager.Recipe;
 
@@ -41,8 +46,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
             recipePhoto.setLayoutParams(parms);*/
         }
-
-
     }
 
     public RecipeListAdapter(List<Recipe> recipeList) {
@@ -67,10 +70,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         recipeListViewHolder.recipeDescription.setText(recipeList.get(i).getDescription());
        // recipeListViewHolder.recipePhoto.setImageResource(recipeList.get(i).getImageId());
         recipeListViewHolder.recipePhoto.setImageResource(R.drawable.culinary);
-
-
+        recipeListViewHolder.cardView.setOnClickListener(new ItemClickSupport(recipeList.get(i)));
         recipeListViewHolder.cardView.setOnLongClickListener(new LongClickListenerRecipeRecord(recipeList.get(i)));
-
     }
 
     @Override

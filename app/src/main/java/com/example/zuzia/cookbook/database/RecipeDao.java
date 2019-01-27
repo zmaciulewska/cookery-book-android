@@ -25,7 +25,7 @@ public interface RecipeDao {
     LiveData<List<Recipe>> getAllRecipes();
 
     @Query("Select * FROM " + RecipeDatabase.TABLE_NAME + " where recipe_id = :id")
-    Recipe getSingleRecord(int id);
+    LiveData<Recipe> getSingleRecord(int id);
 
     @Query("Select * from " + RecipeDatabase.TABLE_NAME + " where title like :title")
     LiveData<List<Recipe>> findByTitle(String title);

@@ -4,6 +4,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import static com.example.zuzia.cookbook.database.RecipeDatabase.DATABASE_VERSION;
 
 @Database(entities = {Recipe.class}, version = DATABASE_VERSION)
+@TypeConverters({IngredientsConverters.class})
 public abstract class RecipeDatabase extends RoomDatabase {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "recipe_database.db";
@@ -24,7 +26,6 @@ public abstract class RecipeDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (RecipeDatabase.class) {
                 if (INSTANCE == null) {
-                    // Create database here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             RecipeDatabase.class, DATABASE_NAME)
                             .addCallback(callback).build();

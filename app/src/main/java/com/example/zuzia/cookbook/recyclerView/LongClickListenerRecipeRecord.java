@@ -35,20 +35,16 @@ class LongClickListenerRecipeRecord implements View.OnLongClickListener {
                             editRecord(actualRecipe);
                         } else if (item == 1) {
                             deleteRecord(actualRecipe);
-                            //new TableControllerTask(context).delete(id);
-
                         }
                         dialog.dismiss();
                     }
                 }).show();
-       // return false;
         return true;
     }
 
     private void deleteRecord(Recipe recipe) {
         MainActivity.recipeViewModel.delete(recipe);
         Toast.makeText(context, "Recipe deleted.", Toast.LENGTH_SHORT).show();
-        //((MainActivity) context).readRecords();
     }
 
     private void editRecord(Recipe recipe) {
@@ -67,14 +63,8 @@ class LongClickListenerRecipeRecord implements View.OnLongClickListener {
                         actualRecipe.setTitle(title.getText().toString());
                         actualRecipe.setDescription(description.getText().toString());
                         actualRecipe.setInstruction(instruction.getText().toString());
-
-
                         MainActivity.recipeViewModel.update(actualRecipe);
-
-                        //tableControllerTask.update(task1);
                         Toast.makeText(context, "Recipe updated.", Toast.LENGTH_SHORT).show();
-
-                        //((MainActivity) context).readRecords();
                         dialog.cancel();
                     }
                 }).show();

@@ -1,8 +1,12 @@
 package com.example.zuzia.cookbook;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,23 +15,49 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zuzia.cookbook.recipesManager.Recipe;
-import com.example.zuzia.cookbook.recipesManager.RecipesManager;
+import com.example.zuzia.cookbook.database.Recipe;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
 
-    private RecipesManager recipesManager = RecipesManager.getInstance();
     Button imageButton;
+    Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("CookBook", "Details on create");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Integer recipeId = getIntent().getExtras().getInt("recipeId", 0);
-        Recipe recipe = recipesManager.getRecipeList().get(recipeId);
 
+        LiveData<Recipe> recipeLiveData = MainActivity.recipeViewModel.getRecipe(recipeId);
+        recipeLiveData.observe(this, new Observer<Recipe>() {
+            @Override
+            public void onChanged(@Nullable Recipe recipeTmp) {
+                recipe = recipeTmp;
+                display();
+            }
+        });
+
+
+    }
+    public void addListenerOnButton() {
+        imageButton = (Button) findViewById(R.id.imageButtonSelector);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(RecipeDetailsActivity.this,
+                        "ImageButton (selector) is clicked!",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+    }
+    private void display() {
         // ingredients list
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_view_element, recipe.getIngredients());
         ListView ingredientsList = findViewById(R.id.ingredients_list);
@@ -54,29 +84,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         TextView descriptionTextView = findViewById(R.id.details_description);
         descriptionTextView.setText(description);
         // photo
-        int photoId = recipe.getImageId();
-        ImageView imageView = findViewById(R.id.details_photo);
-        imageView.setImageResource(photoId);
+        //int photoId = recipe.getImageId();
+        ImageView imageView = findViewById(R.id.recipe_photo);
+
+        //imageView.setImageResource(photoId);
 
 
         addListenerOnButton();
-    }
-    public void addListenerOnButton() {
-
-        imageButton = (Button) findViewById(R.id.imageButtonSelector);
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                Toast.makeText(RecipeDetailsActivity.this,
-                        "ImageButton (selector) is clicked!",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
 
     }
 
