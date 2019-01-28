@@ -17,6 +17,7 @@
     <string name="title">Tytuł</string>
     <string name="description">Opis</string>
     <string name="instruction">Instrukcja</string>
+
     <plurals name="details_ingredients">
         <item quantity="one">Składnik</item>
         <item quantity= "other">Składniki</item>
